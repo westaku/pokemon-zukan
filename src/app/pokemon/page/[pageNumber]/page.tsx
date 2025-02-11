@@ -1,5 +1,7 @@
 import PokeList from "@/components/PokeList";
 
+export const dynamic = "force-dynamic";
+
 export default function PokemonListPage({
   params,
 }: {

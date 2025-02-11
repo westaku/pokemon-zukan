@@ -1,6 +1,8 @@
+"use client";
+
 import { Pagination } from "@mui/material";
+import { useRouter } from "next/navigation";
 import styled from "styled-components";
-// import { useNavigate, useSearchParams } from "react-router-dom";
 
 const PaginationContainer = styled.div`
   padding-top: 5%;
@@ -11,10 +13,12 @@ const PaginationContainer = styled.div`
   }
 `;
 
-const PokeListPagination = () => {
-  // const [searchParams, setSearchParams] = useSearchParams();
-  // const currentPage = parseInt(searchParams.get("pageno") || "1", 10);
-  // const navigate = useNavigate();
+type PokemonListPaginationProps = {
+  currentPage: number;
+};
+
+const PokeListPagination = ({ currentPage }: PokemonListPaginationProps) => {
+  const router = useRouter();
 
   const hundlePageChange = (
     _e: React.ChangeEvent<unknown>,
@@ -22,13 +26,14 @@ const PokeListPagination = () => {
   ) => {
     // setSearchParams({ page: pageNumber.toString() });
     // navigate(`/?pageno=${pageNumber}`);
+    router.push(`/pokemon/page/${pageNumber}`);
   };
 
   return (
     <PaginationContainer>
       <Pagination
         count={100}
-        // page={currentPage}
+        page={currentPage}
         onChange={hundlePageChange}
         color="primary"
       />
