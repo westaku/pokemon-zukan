@@ -5,7 +5,7 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-// import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 
 type Pokemon = {
   id: number;
@@ -21,10 +21,10 @@ type PokeCardProps = {
 };
 
 const PokeCard = ({ pokemon }: PokeCardProps) => {
-  // const navigate = useNavigate();
+  const router = useRouter();
 
   const onClickPokemon = () => {
-    // navigate(`/pokemon/${pokemon.id}`);
+    router.push(`/pokemon/detail/${pokemon.id}`);
   };
 
   return (
