@@ -1,5 +1,7 @@
 import PokeListPagination from "@/components/PokeListPagination";
 
+export const dynamic = "force-dynamic";
+
 export default function PokemonPageLayout({
   children,
   params,
