@@ -32,7 +32,7 @@ const PokeListPagination = ({ currentPage }: PokemonListPaginationProps) => {
   return (
     <PaginationContainer>
       <Pagination
-        count={100}
+        count={131}
         page={currentPage}
         onChange={hundlePageChange}
         color="primary"

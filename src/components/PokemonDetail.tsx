@@ -37,16 +37,24 @@ const PokemonDetail = ({ pokemonIdNumber }: PokemonDetailProps) => {
       <NavButton isPrev={true} hundleClick={() => onClickNav(-1)} />
       <Card
         sx={{
-          width: { xs: "80%", sm: "70%" },
-          height: "70%",
+          width: { xs: "90%", sm: "60%" },
+          // height: "40%",
+          // maxHeight: "60%",
           margin: "0 auto",
           textAlign: "center",
           marginTop: 3,
         }}
         raised={true}
       >
-        <CardMedia component="img" height="100%" image={data?.image} sx={{}} />
-        <CardContent>
+        <CardMedia component="img" height="60%" image={data?.image} />
+        <CardContent
+          sx={{
+            height: "30%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+          }}
+        >
           <Typography gutterBottom variant="h5">
             {data?.name}
           </Typography>
