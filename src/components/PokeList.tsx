@@ -33,8 +33,10 @@ const PokeList = ({ pageno }: PokeListProps) => {
         <Grid2
           key={pokemon.id}
           size={{ xs: 3, sm: 1 }}
-          children={<PokeCard pokemon={pokemon} />}
-        />
+          // children={}
+        >
+          <PokeCard pokemon={pokemon} />
+        </Grid2>
       ))}
     </Grid2>
   );
