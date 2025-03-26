@@ -1,5 +1,3 @@
-"use client";
-
 import { Pagination } from "@mui/material";
 import { useRouter } from "next/navigation";
 import styled from "styled-components";

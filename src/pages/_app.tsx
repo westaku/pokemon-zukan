@@ -1,6 +1,16 @@
 import type { AppProps } from "next/app";
-import "../app/globals.css";
+import "@/styles/globals.css";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useState } from "react";
+import Navbar from "@/components/Navbar";
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  const [queryClient] = useState(() => new QueryClient());
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Navbar />
+      <Component {...pageProps} />
+    </QueryClientProvider>
+  );
 }

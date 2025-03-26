@@ -1,5 +1,3 @@
-"use client";
-
 import { fetchSinglePokemon } from "@/lib/pokemon";
 import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";

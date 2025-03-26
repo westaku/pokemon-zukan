@@ -1,5 +1,3 @@
-"use client";
-
 import { Grid2 } from "@mui/material";
 import PokeCard from "./PokeCard";
 import { useQuery } from "@tanstack/react-query";
