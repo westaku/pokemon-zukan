@@ -23,7 +23,7 @@ type PokeCardProps = {
 const PokeCard = ({ pokemon }: PokeCardProps) => {
   const router = useRouter();
 
-  const onClickPokemon = () => {
+  const handleClick = () => {
     router.push(`/pokemon/detail/${pokemon.id}`);
   };
 
@@ -37,7 +37,7 @@ const PokeCard = ({ pokemon }: PokeCardProps) => {
       }}
       raised={true}
     >
-      <CardActionArea sx={{ padding: "3% 5%" }} onClick={onClickPokemon}>
+      <CardActionArea sx={{ padding: "3% 5%" }} onClick={handleClick}>
         <CardMedia component="img" height="100%" image={pokemon.image} />
         <CardContent>
           <Typography gutterBottom variant="h5">

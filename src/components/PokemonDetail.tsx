@@ -36,8 +36,6 @@ const PokemonDetail = ({ pokemonIdNumber }: PokemonDetailProps) => {
       <Card
         sx={{
           width: { xs: "90%", sm: "60%" },
-          // height: "40%",
-          // maxHeight: "60%",
           margin: "0 auto",
           textAlign: "center",
           marginTop: 3,

@@ -22,8 +22,6 @@ const PokeListPagination = ({ currentPage }: PokemonListPaginationProps) => {
     _e: React.ChangeEvent<unknown>,
     pageNumber: number
   ) => {
-    // setSearchParams({ page: pageNumber.toString() });
-    // navigate(`/?pageno=${pageNumber}`);
     router.push(`/pokemon/page/${pageNumber}`);
   };
 

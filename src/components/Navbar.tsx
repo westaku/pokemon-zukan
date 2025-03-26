@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 
 const Navbar = () => {
   const router = useRouter();
-  const onClickLogo = () => {
+  const handleClick = () => {
     router.push("/pokemon/page/1");
   };
   return (
@@ -14,7 +14,7 @@ const Navbar = () => {
             variant="h6"
             component="div"
             sx={{ cursor: "pointer" }}
-            onClick={onClickLogo}
+            onClick={handleClick}
           >
             ポケモン図鑑
           </Typography>
