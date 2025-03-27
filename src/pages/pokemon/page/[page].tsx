@@ -2,7 +2,7 @@ import PokeList from "@/components/PokeList";
 import PokeListPagination from "@/components/PokeListPagination";
 import { GetStaticProps, GetStaticPaths } from "next";
 import { fetchPokemonList } from "@/lib/pokemon";
-import type { Pokemon } from "@/components/PokeList";
+import type { Pokemon } from "@/types/pokemon";
 
 type Props = {
   pageno: number;
@@ -24,15 +24,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps<Props> = async (context) => {
-  console.log("getStaticProps が実行されました"); // ビルド時の実行を確認
   const page = parseInt(context.params?.page as string, 10);
   const limit = 10;
   const offset = (page - 1) * 10;
 
+  console.log(`${page}ページ目がSSGされました`);
+
   // サーバーサイドでデータを取得
   const initialData = await fetchPokemonList(limit, offset);
-
-  console.log("initialData", initialData);
 
   return {
     props: {
