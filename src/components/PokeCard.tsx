@@ -5,28 +5,14 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
+import type { Pokemon } from "@/types/pokemon";
 
-type Pokemon = {
-  id: number;
-  name: string;
-  image: string;
-  types: string[];
-  weight: number;
-  height: number;
-  abilities: string[];
-};
 type PokeCardProps = {
   pokemon: Pokemon;
 };
 
 const PokeCard = ({ pokemon }: PokeCardProps) => {
-  const router = useRouter();
-
-  const handleClick = () => {
-    router.push(`/pokemon/detail/${pokemon.id}`);
-  };
-
   return (
     <Card
       sx={{
@@ -37,18 +23,26 @@ const PokeCard = ({ pokemon }: PokeCardProps) => {
       }}
       raised={true}
     >
-      <CardActionArea sx={{ padding: "3% 5%" }} onClick={handleClick}>
-        <CardMedia component="img" height="100%" image={pokemon.image} />
-        <CardContent>
-          <Typography gutterBottom variant="h5">
-            {pokemon.name}
-          </Typography>
-          <Typography>{pokemon.types.join(", ")}</Typography>
-          <Typography>{pokemon.weight}</Typography>
-          <Typography>{pokemon.height}</Typography>
-          <Typography>{pokemon.abilities.join(", ")}</Typography>
-        </CardContent>
-      </CardActionArea>
+      <Link
+        href={`/pokemon/detail/${pokemon.id}`}
+        prefetch={false}
+        scroll={false}
+        shallow={false}
+        style={{ textDecoration: "none" }}
+      >
+        <CardActionArea sx={{ padding: "3% 5%" }}>
+          <CardMedia component="img" height="100%" image={pokemon.image} />
+          <CardContent>
+            <Typography gutterBottom variant="h5">
+              {pokemon.name}
+            </Typography>
+            <Typography>{pokemon.types.join(", ")}</Typography>
+            <Typography>{pokemon.weight}</Typography>
+            <Typography>{pokemon.height}</Typography>
+            <Typography>{pokemon.abilities.join(", ")}</Typography>
+          </CardContent>
+        </CardActionArea>
+      </Link>
     </Card>
   );
 };

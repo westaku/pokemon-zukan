@@ -1,38 +1,39 @@
 import { fetchSinglePokemon } from "@/lib/pokemon";
 import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
-import styled from "styled-components";
-import { useRouter } from "next/navigation";
+import { styled } from "@mui/material/styles";
 import NavButton from "./NavButton";
+import type { Pokemon } from "@/types/pokemon";
 
 type PokemonDetailProps = {
   pokemonIdNumber: number;
+  initialData: Pokemon;
 };
 
-const PokeCardContainer = styled.div`
-  display: flex;
-`;
+const PokeCardContainer = styled("div")({
+  display: "flex",
+});
 
-const PokemonDetail = ({ pokemonIdNumber }: PokemonDetailProps) => {
-  const router = useRouter();
-
+const PokemonDetail = ({
+  pokemonIdNumber,
+  initialData,
+}: PokemonDetailProps) => {
   const { data, error, isLoading } = useQuery({
     queryKey: ["SinglePokemon", pokemonIdNumber],
     queryFn: () => fetchSinglePokemon(pokemonIdNumber),
     staleTime: 1000 * 60 * 5,
+    initialData,
   });
-
-  const onClickNav = (diff: number) => {
-    const prevId = Math.max(pokemonIdNumber + diff, 1);
-    router.push(`/pokemon/detail/${prevId}`);
-  };
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
+  const prevId = Math.max(pokemonIdNumber - 1, 1);
+  const nextId = pokemonIdNumber + 1;
+
   return (
     <PokeCardContainer>
-      <NavButton isPrev={true} hundleClick={() => onClickNav(-1)} />
+      <NavButton isPrev={true} href={`/pokemon/detail/${prevId}`} />
       <Card
         sx={{
           width: { xs: "90%", sm: "60%" },
@@ -60,7 +61,7 @@ const PokemonDetail = ({ pokemonIdNumber }: PokemonDetailProps) => {
           <Typography>{data?.abilities.join(", ")}</Typography>
         </CardContent>
       </Card>
-      <NavButton isPrev={false} hundleClick={() => onClickNav(1)} />
+      <NavButton isPrev={false} href={`/pokemon/detail/${nextId}`} />
     </PokeCardContainer>
   );
 };

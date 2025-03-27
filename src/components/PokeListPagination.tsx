@@ -1,37 +1,38 @@
-import { Pagination } from "@mui/material";
-import { useRouter } from "next/navigation";
-import styled from "styled-components";
+import { Pagination, PaginationItem } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import Link from "next/link";
 
-const PaginationContainer = styled.div`
-  padding-top: 5%;
-  padding-bottom: 3%;
-  & ul {
-    display: flex;
-    justify-content: center;
-  }
-`;
+const PaginationContainer = styled("div")({
+  paddingTop: "5%",
+  paddingBottom: "3%",
+  "& ul": {
+    display: "flex",
+    justifyContent: "center",
+  },
+});
 
 type PokemonListPaginationProps = {
   currentPage: number;
 };
 
 const PokeListPagination = ({ currentPage }: PokemonListPaginationProps) => {
-  const router = useRouter();
-
-  const hundlePageChange = (
-    _e: React.ChangeEvent<unknown>,
-    pageNumber: number
-  ) => {
-    router.push(`/pokemon/page/${pageNumber}`);
-  };
-
   return (
     <PaginationContainer>
       <Pagination
         count={131}
         page={currentPage}
-        onChange={hundlePageChange}
         color="primary"
+        renderItem={(item) => (
+          <Link
+            href={`/pokemon/page/${item.page}`}
+            prefetch={false}
+            scroll={false}
+            shallow={false}
+            style={{ textDecoration: "none" }}
+          >
+            <PaginationItem {...item} />
+          </Link>
+        )}
       />
     </PaginationContainer>
   );

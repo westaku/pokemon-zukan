@@ -1,40 +1,42 @@
 import { IconButton } from "@mui/material";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import styled from "styled-components";
+import { styled } from "@mui/material/styles";
+import Link from "next/link";
 
 type NavButtonProps = {
   isPrev: boolean;
-  hundleClick: () => void;
+  href: string;
 };
 
-const NavButtonContainer = styled.div`
-  padding: 0 4%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;
+const NavButtonContainer = styled("div")({
+  padding: "0 4%",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+});
 
-const NavButton = ({ isPrev, hundleClick }: NavButtonProps) => {
+const NavButton = ({ isPrev, href }: NavButtonProps) => {
   return (
     <NavButtonContainer>
-      <IconButton
-        onClick={hundleClick}
-        aria-label="prev"
-        sx={{
-          color: "#fff", // アイコン（線）の色
-          backgroundColor: "#1976d2", // 背景色 (適宜お好みで)
-          borderRadius: "50%", // 円形にする
-          padding: "12px", // アイコン周りに余白
-          fontSize: 24, // アイコンの大きさ (px で指定)
-          "&:hover": {
-            padding: "16px",
-            backgroundColor: "#064686", // ホバー時の背景色
-          },
-        }}
-      >
-        {isPrev ? <NavigateBeforeIcon /> : <NavigateNextIcon />}
-      </IconButton>
+      <Link href={href} prefetch={false} scroll={false} shallow={false}>
+        <IconButton
+          aria-label={isPrev ? "prev" : "next"}
+          sx={{
+            color: "#fff",
+            backgroundColor: "#1976d2",
+            borderRadius: "50%",
+            padding: "12px",
+            fontSize: 24,
+            "&:hover": {
+              padding: "16px",
+              backgroundColor: "#064686",
+            },
+          }}
+        >
+          {isPrev ? <NavigateBeforeIcon /> : <NavigateNextIcon />}
+        </IconButton>
+      </Link>
     </NavButtonContainer>
   );
 };
