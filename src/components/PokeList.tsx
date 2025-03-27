@@ -2,16 +2,7 @@ import { Grid2 } from "@mui/material";
 import PokeCard from "./PokeCard";
 import { useQuery } from "@tanstack/react-query";
 import { fetchPokemonList } from "@/lib/pokemon";
-
-export type Pokemon = {
-  id: number;
-  name: string;
-  image: string;
-  types: string[];
-  weight: number;
-  height: number;
-  abilities: string[];
-};
+import type { Pokemon } from "@/types/pokemon";
 
 type PokeListProps = {
   pageno: number;

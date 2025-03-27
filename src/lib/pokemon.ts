@@ -1,44 +1,6 @@
 import { apiClient } from "./axiosInstance";
-
-type PokemonListResponse = {
-  count: number;
-  next: string;
-  previous: string;
-  results: { name: string; url: string }[];
-};
-type PokemonResponse = {
-  id: number;
-  name: string;
-  height: number;
-  weight: number;
-  types: {
-    slot: number;
-    type: {
-      name: string;
-      url: string;
-    };
-  }[];
-  sprites: {
-    front_default: string;
-  };
-  abilities: {
-    ability: {
-      name: string;
-      url: string;
-    };
-    is_hidden: boolean;
-    slot: number;
-  }[];
-};
-type Pokemon = {
-  id: number;
-  name: string;
-  image: string;
-  types: string[];
-  weight: number;
-  height: number;
-  abilities: string[];
-};
+import type { Pokemon } from "@/types/pokemon";
+import type { PokemonListResponse, PokemonResponse } from "@/types/api";
 
 export const fetchPokemonList = async (
   limit: number = 10,
