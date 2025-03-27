@@ -3,11 +3,22 @@ import PokeCard from "./PokeCard";
 import { useQuery } from "@tanstack/react-query";
 import { fetchPokemonList } from "@/lib/pokemon";
 
-type PokeListProps = {
-  pageno: number;
+export type Pokemon = {
+  id: number;
+  name: string;
+  image: string;
+  types: string[];
+  weight: number;
+  height: number;
+  abilities: string[];
 };
 
-const PokeList = ({ pageno }: PokeListProps) => {
+type PokeListProps = {
+  pageno: number;
+  initialData: Pokemon[];
+};
+
+const PokeList = ({ pageno, initialData }: PokeListProps) => {
   const limit = 10;
   const offset = (pageno - 1) * 10;
 
@@ -15,6 +26,7 @@ const PokeList = ({ pageno }: PokeListProps) => {
     queryKey: ["pokemonList", pageno],
     queryFn: () => fetchPokemonList(limit, offset),
     staleTime: 1000 * 60 * 5,
+    initialData,
   });
 
   if (isLoading) return <div>Loading...</div>;
@@ -28,11 +40,7 @@ const PokeList = ({ pageno }: PokeListProps) => {
       sx={{ paddingTop: 3 }}
     >
       {data?.map((pokemon) => (
-        <Grid2
-          key={pokemon.id}
-          size={{ xs: 3, sm: 1 }}
-          // children={}
-        >
+        <Grid2 key={pokemon.id} size={{ xs: 3, sm: 1 }}>
           <PokeCard pokemon={pokemon} />
         </Grid2>
       ))}
