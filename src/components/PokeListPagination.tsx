@@ -1,38 +1,61 @@
-import { Pagination, PaginationItem } from "@mui/material";
+import {
+  Pagination,
+  PaginationItem,
+  PaginationRenderItemParams,
+} from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Link from "next/link";
 
-const PaginationContainer = styled("div")({
-  paddingTop: "5%",
-  paddingBottom: "3%",
+const TOTAL_PAGES = 131;
+
+const PaginationContainer = styled("div")(({ theme }) => ({
+  padding: theme.spacing(4, 0),
   "& ul": {
     display: "flex",
     justifyContent: "center",
+    gap: theme.spacing(1),
   },
-});
+}));
 
-type PokemonListPaginationProps = {
+const StyledPaginationItem = styled(PaginationItem)(({ theme }) => ({
+  "&.Mui-selected": {
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.primary.contrastText,
+    "&:hover": {
+      backgroundColor: theme.palette.primary.dark,
+    },
+  },
+}));
+
+interface PokemonListPaginationProps {
   currentPage: number;
-};
+}
 
-const PokeListPagination = ({ currentPage }: PokemonListPaginationProps) => {
+const PokeListPagination: React.FC<PokemonListPaginationProps> = ({
+  currentPage,
+}) => {
+  const renderPaginationItem = (item: PaginationRenderItemParams) => (
+    <Link
+      href={`/pokemon/page/${item.page}`}
+      prefetch={false}
+      scroll={false}
+      shallow={false}
+      style={{ textDecoration: "none" }}
+    >
+      <StyledPaginationItem {...item} />
+    </Link>
+  );
+
   return (
     <PaginationContainer>
       <Pagination
-        count={131}
+        count={TOTAL_PAGES}
         page={currentPage}
         color="primary"
-        renderItem={(item) => (
-          <Link
-            href={`/pokemon/page/${item.page}`}
-            prefetch={false}
-            scroll={false}
-            shallow={false}
-            style={{ textDecoration: "none" }}
-          >
-            <PaginationItem {...item} />
-          </Link>
-        )}
+        renderItem={renderPaginationItem}
+        size="large"
+        showFirstButton
+        showLastButton
       />
     </PaginationContainer>
   );
